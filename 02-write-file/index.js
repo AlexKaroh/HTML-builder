@@ -27,6 +27,7 @@ const { stdin, stdout } = process;
         );
 
     });
+    
     process.on('SIGINT', () =>{
         console.log('Прощай :(');
         process.exit();
