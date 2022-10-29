@@ -1,5 +1,20 @@
+const fs = require('fs');
 const path = require('path');
-console.log(path.basename(__filename)) // index.js - имя файла на Windows, полный путь к файлу на POSIX-системах
-console.log(path.dirname(__filename)) // C:\Users\Admin\Desktop\nodejs-basic - название папки
-console.log(path.extname(__filename)) // .js - расширение файла
-console.log(path.parse(__filename));
+
+fs.readdir(path.join(__dirname,'secret-folder'), {withFileTypes: true}, (err, files) => {
+    if (err) throw err;
+    
+    files.forEach(file => {
+        if(file.isFile()) 
+        fs.stat(path.join(__dirname,'secret-folder', file.name), (error, stats) => {
+            if (err) {
+                throw err;
+            }
+            else {
+                let fileSizeInBytes = stats.size ;
+                let fileSizeInKiloBytes = Math.ceil((fileSizeInBytes / (1000))*100)/100;
+              return console.log(`${file.name.split('.')[0]} - ${path.extname(file.name).slice(1)} - ${fileSizeInKiloBytes + 'kb'}`);
+            }
+        });
+    });
+});
