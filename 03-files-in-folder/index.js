@@ -12,8 +12,7 @@ fs.readdir(path.join(__dirname,'secret-folder'), {withFileTypes: true}, (err, fi
             }
             else {
                 let fileSizeInBytes = stats.size ;
-                let fileSizeInKiloBytes = Math.ceil((fileSizeInBytes / (1000))*100)/100;
-              return console.log(`${file.name.split('.')[0]} - ${path.extname(file.name).slice(1)} - ${fileSizeInKiloBytes + 'kb'}`);
+              return console.log(`${file.name.split('.')[0]} - ${path.extname(file.name).slice(1)} - ${fileSizeInBytes + 'kb'}`);
             }
         });
     });
